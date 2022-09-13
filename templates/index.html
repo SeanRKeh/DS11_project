@@ -26,6 +26,10 @@
         <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
         <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 
+        <!-- autocomplete -->
+        <script src="https://cdn.jsdelivr.net/gh/tomik23/autocomplete@1.8.5/dist/js/autocomplete.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tomik23/autocomplete@1.8.5/dist/css/autocomplete.min.css"/>
+
         <!-- web css -->
         <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
 
@@ -83,11 +87,156 @@
               attribution: '© OpenStreetMap'
             }).addTo(map);
 
+
+
+            // --------------------------------------------------------------
+            // create seearch button
+
+            // add "random" button
+            const buttonTemplate = `<div class="auto-search-wrapper max-height"><input type="text" id="marker" autocomplete="off"  aria-describedby="instruction" aria-label="Search ..." /><div id="instruction" class="hidden">When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.</div></div>`;
+
+            // create custom button
+            const customControl = L.Control.extend({
+              // button position
+              options: {
+                position: "topright",
+                className: "leaflet-autocomplete",
+              },
+
+              // method
+              onAdd: function () {
+                return this._initialLayout();
+              },
+
+              _initialLayout: function () {
+                // create button
+                const container = L.DomUtil.create(
+                  "div",
+                  "leaflet-bar " + this.options.className
+                );
+
+                L.DomEvent.disableClickPropagation(container);
+
+                container.innerHTML = buttonTemplate;
+
+                return container;
+              },
+            });
+
+            // adding new button to map controll
+            map.addControl(new customControl());
+
+            // --------------------------------------------------------------
+
+            // input element
+            const root = document.getElementById("marker");
+            root.placeholder = "Search ...";
+
+
+
+            // function click on clear button
+            function clickOnClearButton() {
+              document.querySelector(".auto-clear").click();
+            }
+
+            // function clear input
+            map.on("click", () => {
+              document
+                .querySelector(".leaflet-autocomplete")
+                .classList.remove("active-autocomplete");
+
+              clickOnClearButton();
+            });
+
+            // autocomplete section
+            // more config find in https://github.com/tomik23/autocomplete
+            // --------------------------------------------------------------
+
+            new Autocomplete("marker", {
+              delay: 1000,
+              selectFirst: true,
+              howManyCharacters: 2,
+
+              onSearch: function ({ currentValue }) {
+                const api = `https://nominatim.openstreetmap.org/search?format=geojson&limit=5&q=${encodeURI(
+                  currentValue
+                )}`;
+
+                /**
+                 * Promise
+                 */
+                return new Promise((resolve) => {
+                  fetch(api)
+                    .then((response) => response.json())
+                    .then((data) => {
+                      resolve(data.features);
+                    })
+                    .catch((error) => {
+                      console.error(error);
+                    });
+                });
+              },
+
+              onResults: ({ currentValue, matches, template }) => {
+                const regex = new RegExp(currentValue, "i");
+                // checking if we have results if we don't
+                // take data from the noResults method
+                return matches === 0
+                  ? template
+                  : matches
+                      .map((element) => {
+                        return `
+                          <li role="option">
+                            <p>${element.properties.display_name.replace(
+                              regex,
+                              (str) => `<b>${str}</b>`
+                            )}</p>
+                          </li> `;
+                      })
+                      .join("");
+              },
+
+              onSubmit: ({ object }) => {
+                const { display_name } = object.properties;
+                const cord = object.geometry.coordinates;
+                // custom id for marker
+                // const customId = Math.random();
+
+                // remove last marker
+                map.eachLayer(function (layer) {
+                  if (layer.options && layer.options.pane === "markerPane") {
+                    if (layer._icon.classList.contains("leaflet-marker-locate")) {
+                      map.removeLayer(layer);
+                    }
+                  }
+                });
+
+                // add marker
+                const marker = L.marker([cord[1], cord[0]], {
+                  title: display_name,
+                });
+
+                // add marker to map
+                marker.addTo(map).bindPopup(display_name);
+
+                // set marker to coordinates
+                map.setView([cord[1], cord[0]], 16);
+
+                // add class to marker
+                L.DomUtil.addClass(marker._icon, "leaflet-marker-locate");
+              },
+
+              // the method presents no results
+              noResults: ({ currentValue, template }) =>
+                template(`<li>No results found: "${currentValue}"</li>`),
+            });
+
             L.control.scale().addTo(map);
             
             var marker = L.marker([-37.815, 144.964]).addTo(map);
             marker.bindPopup("<b>Hello world!</b><br>I am a centre popup.");
 
+            /* old search
             var geocoder = L.Control.geocoder({
               defaultMarkGeocode: false,
               collapsed: false,
@@ -100,7 +249,7 @@
                 marker2.bindPopup(e.geocode.name).openPopup();
               })
               .addTo(map);
-
+            */
             
             //Create report button
             const report = L.control({
