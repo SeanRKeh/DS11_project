@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- bootstrap 
+        Replaced with a more updated (version 5.2.1) of bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+        <!-- vegalite -->
+        <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+        <!-- leaflet -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
+
+        <!-- leaflet control geocoder -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+        <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+        <!-- web css -->
+        <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+
+        <!-- title -->
+        <title>DS11 Web App</title>
+    </head>
+
+    <body>
+        <!-- doesn't work btw 
+        <button onclick="BackToTop()" id="topbtn">Up</button>
+        -->
+        
+        <div id="map">
+          <div class="leaflet-control userbuttons">
+            <button type="button" class="btn btn-primary btn-circle reportbtn">Report</button>
+            <button type="button" class="btn btn-primary btn-circle reviewbtn">Review</button>
+          </div>
+        </div>
+
+        <!-- This is for test purposes -->
+        <iframe src="{{ url_for('static', filename= 'html/reportform.html') }}" title="Report Form">
+        </iframe>
+
+        <!--
+        <div id="Info_bubble"></div>
+        -->
+
+        <script type="text/javascript">
+            /* doesn't work btw 
+            topbtn = document.getElementById("topbtn");
+            window.onscroll = function() {scrollFunction()};
+            function scrollFunction() {
+              if (document.body.scrollTop > 260 || document.documentElement.scrollTop > 260) {
+                topbtn.style.display = "block";
+              } else {
+                topbtn.style.display = "block";
+              }
+            }
+
+            function BackToTop() {
+              document.documentElement.scrollTop = 0;
+            }
+            */
+
+
+            var map = L.map('map', {
+              center: [-37.815, 144.964],
+              zoom: 13
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              maxZoom: 19,
+              attribution: '© OpenStreetMap'
+            }).addTo(map);
+
+            L.control.scale().addTo(map);
+            
+            var marker = L.marker([-37.815, 144.964]).addTo(map);
+            marker.bindPopup("<b>Hello world!</b><br>I am a centre popup.");
+
+            var geocoder = L.Control.geocoder({
+              defaultMarkGeocode: false,
+              collapsed: false,
+              showUniqueResult: false,
+              showResultIcons: true,
+            })
+              .on('markgeocode', function(e) {
+                map.setView(center = e.geocode.center,16)
+                var marker2 = L.marker(e.geocode.center).addTo(map);
+                marker2.bindPopup(e.geocode.name).openPopup();
+              })
+              .addTo(map);
+
+            
+            //Create report button
+            const report = L.control({
+              position: "bottomright",
+            });
+
+            // we create a div with using the legend class
+            const report_button = L.DomUtil.create("button", "button");
+
+            //add report button to map
+            report.addTo(map);
+
+            
+            vega.scheme('Tol_muted', ['#88ccee', '#44aa99', '#117733', '#332288', '#ddcc77', '#999933', '#cc6677', '#882255', '#aa4499', '#dddddd']);
+            vega.scheme('Tol_light', ['#bbcc33', '#aaaa00', '#77aadd', '#ee8866', '#ddcc77', '#eedd88', '#ffaabb', '#99ddff', '#44bb99', '#dddddd']);
+          
+            var bubble = "static/js/Info_bubble.vg.json";
+            vegaEmbed('#Info_bubble', bubble, {"actions": false}).then(function(result) {
+              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);
+            
+          </script>
+    </body>
+</html>
