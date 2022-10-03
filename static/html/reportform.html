@@ -1,4 +1,11 @@
 <!-- Work in progress, don't worry if you don't understand what this is-->
+<!-- All resources used to create this....
+1. A checkout example form in bootstrap's website.... https://getbootstrap.com/docs/5.2/examples/checkout/. The report form is heavily inspired by this one
+2. grid system.... https://getbootstrap.com/docs/5.2/layout/grid/. This is all about how to arrange div elements inside of a div in a tabular form (rows, columns). This is what's mainly used when creating good looking forms forms
+3. Flexbox.... https://flexboxfroggy.com/. This is an introduction to flexbox, which is a way to arrange any items inside of a div. (pretty similar to the grid system but has a more general used). 
+This is a foundation piece which i heavily recommend learning (the website provided is a online game where you have to solve the flexbox puzzles). Flexbox wasn't directly used to create this form 
+but it was used to arrange the report/review buttons in the home screen.
+-->
 <head>
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -6,6 +13,8 @@
     <link href="index.html" rel="import" />
 </head>
 <body>
+  <div class="container">
+
     <div class="py-4 text-center">
       <h4>Report a crime form</h4>
     </div>
@@ -105,12 +114,12 @@
           <hr class="my-4">
           
           <div class="row px-4">
-            <button type="cancel" class="col-6 btn btn-danger btn-lg">Cancel</button>
-            <button type="submit" class="col-6 btn btn-primary btn-lg">Submit</button>
+            <button type="cancel" class="col-sm-12 col-lg-6 btn btn-danger btn-lg">Cancel</button>
+            <button type="submit" class="col-sm-12 col-lg-6 btn btn-primary btn-lg">Submit</button>
           </div>
           
         </form>
     </div>
-
+  </div>
     
 </body>
