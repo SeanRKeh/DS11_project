@@ -47,6 +47,7 @@
         max-height: 600px;
         height: 100%;
         overflow: hidden;
+        display: none;
         z-index: 99999;
         width: 1100px;
         bottom: 0px;
@@ -65,7 +66,7 @@
         .active-marker-popup .marker-popup {
           max-height: 600px;
           height: 100%;
-          
+          display: block;
           transition: transform 0.3 ease-in-out;
           transform:translate(50%);
           right:50%;
@@ -114,7 +115,7 @@
         <div id="map">
           <div class="leaflet-control userbuttons">
             <button type="button" onclick= "reportClicked()" class="btn btn-primary btn-circle reportbtn">Report</button>
-            <button type="button" onclick = "ReviewReportClicked()" class="btn btn-primary btn-circle reviewbtn">Review</button>
+            <button type="button" onclick = "reviewClicked()" class="btn btn-primary btn-circle reviewbtn">Review</button>
           </div>
         </div>
 
@@ -125,7 +126,7 @@
         <div class="container" id="reportForm" style="display: none;">
 
           <div class="py-4 text-center">
-            <h4>Report a crime form</h4>
+            <h4>Report a crime</h4>
           </div>
           <div class="row g-4 p-3 border">
               <form>
@@ -231,9 +232,74 @@
           </div>
         
         </div>
+
          <!-- Review Form (yet to be added) -->
          <!-- .... -->
+        <div class="container" id="reviewForm" style="display: none;">
 
+          <div class="py-4 text-center">
+            <h4>Write a review</h4>
+          </div>
+          <div class="row g-4 p-3 border">
+              <form>
+                <div class="row g-3">                
+                  <div class="col-12">
+                    <label class= "form-label" for="inputDescription">How do you feel about this area</label>
+                    <textarea type="description" class="form-control" id="inputDescription" placeholder="e.g. I have been in this area for ... and ..." rows="4" required></textarea>
+                  </div>
+      
+                </div>
+      
+                <hr class="my-4">
+      
+                <div class="row g-3">
+                  <div class="col-12">
+                  <div class="form-group">
+                    <label class="form-label" for="inputAreaDangerRating">How safe would you rate this area (1 - least safe): </label>
+                    <br>
+    
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inputSafetyRating" id="inputSafetyRating1" value="option1" checked>
+                      <label class="form-check-label" for="inputSafetyRating1">
+                        1
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inputSafetyRating" id="inputSafetyRating2" value="option2" >
+                      <label class="form-check-label" for="inputSafetyRating2">
+                        2
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inputSafetyRating" id="inputSafetyRating3" value="option3" >
+                      <label class="form-check-label" for="inputSafetyRating3">
+                        3
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inputSafetyRating" id="inputSafetyRating4" value="option4" >
+                      <label class="form-check-label" for="inputSafetyRating4">
+                        4
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inputSafetyRating" id="inputSafetyRating5" value="option5" >
+                      <label class="form-check-label" for="inputSafetyRating5">
+                        5
+                      </label>
+                    </div>
+                  </div>
+                </div>
+      
+                <hr class="my-4">
+                
+                <div class="row px-4">
+                  <button type="cancel" onclick="formEnd()" class="col-sm-12 col-lg-6 btn btn-danger btn-lg">Cancel</button>
+                  <button type="submit" onclick="formEnd()" class="col-sm-12 col-lg-6 btn btn-primary btn-lg">Submit</button>
+                </div>
+                
+              </form>
+          </div>
 
 
           
