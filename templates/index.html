@@ -5,6 +5,9 @@
         Replaced with a more updated (version 5.2.1) of bootstrap-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
+        <!-- Bootstap icons-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
         <!-- vegalite -->
         <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
         <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
@@ -41,17 +44,43 @@
       /*The styles here are used for test purposes*/
 
       /*Marker clicked popup*/
+
+
+      .marker-close-button {
+        cursor: pointer;
+        position: absolute;
+        top: 30px;
+        right: 40px;
+        border: none;
+        padding: 5px;
+        font-size: 35px;
+        -webkit-text-stroke: 1px rgb(0, 0, 0);
+        margin: 0;
+        padding: 0;
+        border-radius: 3px;
+        background: none;
+        opacity: 0;
+      }
+
+      .active-marker-popup .marker-close-button {
+        opacity: 1;
+      }
+
+      .active-marker-popup .marker-popup {
+        max-width: 768px;
+        right: 0%;
+        z-index: 99999;
+        bottom: 0px;
+      }
+
       .marker-popup{
         position: absolute;
         background-color:#fff;
-        max-height: 500px;
+        max-height: 600px;
         height: 100%;
         overflow: hidden;
         display: none;
-        z-index: 99999;
-        width: 950px;
-        bottom: 0px;
-        transform:translate(50%,100%);
+        transform:translate(0%);
         padding: 35px 55px;
         border-radius: 30px 30px 0 0;
         font-family: 'Poppins',sans-serif;
@@ -61,14 +90,17 @@
       @media (min-width: 768px) {
         .marker-popup {
           transition: transform 0.3s ease-in-out;
+          transform:translate(50%);
         }
 
         .active-marker-popup .marker-popup {
           max-height: 600px;
           height: 100%;
+          max-width: 1100px;
+          width: 100%;
           display: block;
           transition: transform 0.3 ease-in-out;
-          transform:translate(50%);
+          
           right:50%;
         }
         /* This is used to control where the leaflet-bottom controls go once the marker is clicked (its active).... feel free to comment this code snippet out to see it in action*/
@@ -91,6 +123,9 @@
         <!-------------------------------------------------------------->
         <!-- Create popup when a non-police marker is clicked-->
         <div class="marker-popup">
+          <button class="marker-close-button" onclick= "markerClose()">
+            <i class="bi bi-x-lg"></i>
+          </button>
           <div>
             <h2 class="marker-title">
               Cale Jane Sullivan Marker reports
@@ -104,7 +139,38 @@
           </div>
           <div class="data-vis-content">
             <!--Insert content here-->
-            <div class='tableauPlaceholder' id='viz1664794924185' style='position: relative'><noscript><a href='#'><img alt='OFFENCE LGA RATE REPORT ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;DH&#47;DHSPQRMZF&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;DHSPQRMZF' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;DH&#47;DHSPQRMZF&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1664794924185');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1200px';vizElement.style.height='1227px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1200px';vizElement.style.height='1227px';} else { vizElement.style.width='100%';vizElement.style.height='1977px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+            <div class='tableauPlaceholder' id='viz1665398876907' style='position: relative' >
+              <noscript>
+                <a href='#'><img alt='OFFENCE LGA RATE REPORT ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;HY&#47;HYWBP9Z9K&#47;1_rss.png' style='border: none' /></a>
+              </noscript>
+              <object class='tableauViz'  style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                <param name='embed_code_version' value='3' /> 
+                <param name='path' value='shared&#47;HYWBP9Z9K' /> 
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;HY&#47;HYWBP9Z9K&#47;1.png' /> 
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-US' />
+              </object>
+            </div>                
+            <script type='text/javascript'>                    
+              var divElement = document.getElementById('viz1665398876907');                    
+              var vizElement = divElement.getElementsByTagName('object')[0];                    
+              if ( divElement.offsetWidth > 800 ) { 
+                vizElement.style.width='1200px';vizElement.style.height='1227px';
+              } else if ( divElement.offsetWidth > 500 ) {
+                vizElement.style.width='1200px';vizElement.style.height='1227px';
+              } else { 
+                vizElement.style.width='100%';vizElement.style.height='2027px';
+              }                     
+              var scriptElement = document.createElement('script');                    
+              scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+              vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+            </script>
           </div>
         </div>
 
@@ -118,6 +184,7 @@
             <button type="button" onclick = "reviewClicked()" class="btn btn-primary btn-circle reviewbtn">Review</button>
           </div>
         </div>
+
 
         <!-------------------------------------------------------------->
         <!-------------------------------------------------------------->
@@ -300,7 +367,7 @@
                 
               </form>
           </div>
-
+          </div>
 
           
       </body>
@@ -330,6 +397,14 @@
               document.documentElement.scrollTop = 0;
             }
             */
+
+            const policeMarkerData = {{policeStations | tojson}};
+            for (let i = 0; i < policeMarkerData.length; i++) {
+              
+              console.log(policeMarkerData[i])
+            } 
+
+            
 
             //---------------------------------------------------------------
             //---------------------------------------------------------------
@@ -517,7 +592,7 @@
             //---------------------------------------------------------------
             //The popup marker (for when a non-police marker is clicked) code
             
-            //Function to open/close the marker (atm the marker is closed when the marker is clicked again, this will be changed later )
+            //Function to open/close the marker
             function openMarkerMenu(e){
               target = e.target
               
@@ -529,6 +604,12 @@
                   document.body.classList.add("active-marker-popup")
               }
                 
+            }
+            //Function to close a marker popup using the close appeneded close button
+            function markerClose(){
+            
+              document.body.classList.remove("active-marker-popup");
+              
             }
 
             //---------------------------------------------------------------
@@ -555,6 +636,22 @@
               document.getElementById('reviewForm').style.display = "none";
             }
             
+            //---------------------------------------------------------------
+            //---------------------------------------------------------------
+            //---------------------------------------------------------------
+            //police markers things
+            var PoliceIcon = L.icon({
+              iconUrl: "https://raw.githubusercontent.com/qsun0018/3179/main/icon1.png",
+              iconSize: [80, 80],
+              iconAnchor: [20, 58],
+              popupAnchor: [20, -30],
+            });
+
+            for (let i = 0; i < policeMarkerData.length; i++) {
+              L.marker([policeMarkerData[i][7], policeMarkerData[i][8]], {icon:PoliceIcon}).addTo(map).bindPopup('<b>'+policeMarkerData[i][1]+' police station</b><br>'+'Address: '+policeMarkerData[i][3]+'<br>Phone Number: '+policeMarkerData[i][6])
+            } 
+
+
             
             //---------------------------------------------------------------
             //---------------------------------------------------------------

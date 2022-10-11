@@ -1,0 +1,126 @@
+<!-- Work in progress, don't worry if you don't understand what this is-->
+<!-- All resources used to create this....
+1. A checkout example form in bootstrap's website.... https://getbootstrap.com/docs/5.2/examples/checkout/. The report form is heavily inspired by this one
+2. grid system.... https://getbootstrap.com/docs/5.2/layout/grid/. This is all about how to arrange div elements inside of a div in a tabular form (rows, columns). This is what's mainly used when creating good looking forms forms
+3. Flexbox.... https://flexboxfroggy.com/. This is an introduction to flexbox, which is a way to arrange any items inside of a div. (pretty similar to the grid system but has a more general used). 
+This is a foundation piece which i heavily recommend learning (the website provided is a online game where you have to solve the flexbox puzzles). Flexbox wasn't directly used to create this form 
+but it was used to arrange the report/review buttons in the home screen.
+-->
+<head>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <link href="index.html" rel="import" />
+</head>
+<body>
+  <div class="container" id="reportForm">
+
+    <div class="py-4 text-center">
+      <h4>Report a crime</h4>
+    </div>
+    <div class="row g-4 p-3 border">
+        <form method="post" action=/add_report>
+          <div class="row g-3">
+            <div class="col-12">
+              <label class= "form-label" for="inputTitle">Describe your situation</label>
+              <input type="title" class="form-control" name="inputTitle" aria-describedby="titleHelp" placeholder="e.g. I am being followed...." required>
+              
+            </div>
+          
+            <div class="col-12">
+              <label class= "form-label" for="inputDescription">Description</label>
+              <textarea type="description" class="form-control" name="inputDescription" placeholder="Description of the emergency" rows="4" required></textarea>
+          
+            </div>
+
+          </div>
+
+          <hr class="my-4">
+
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label" for="inputDangerRating">How safe do you feel in this situation?</label>
+
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="inputDangerRating" id="inputDangerRating1" value="option1" checked>
+                <label class="form-check-label" for="inputDangerRating1">
+                  Very Safe
+                </label>
+              </div>
+              <div class=" form-check">
+                <input class="form-check-input" type="radio" name="inputDangerRating" id="inputDangerRating2" value="option2" >
+                <label class="form-check-label" for="inputDangerRating2">
+                  Safe
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="inputDangerRating" id="inputDangerRating3" value="option3" >
+                <label class="form-check-label" for="inputDangerRating3">
+                  Unsure
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="inputDangerRating" id="inputDangerRating4" value="option4" >
+                <label class="form-check-label" for="inputDangerRating4">
+                  Unsafe
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="inputDangerRating" id="inputDangerRating5" value="option5" >
+                <label class="form-check-label" for="inputDangerRating5">
+                  Very Unsafe
+                </label>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-group">
+                <label class="form-label" for="inputAreaDangerRating">How safe would you feel navigting this area in the future?</label>
+
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="inputAreaDangerRating" id="inputAreaDangerRating1" value="option1" checked>
+                  <label class="form-check-label" for="inputAreaDangerRating1">
+                    Very Safe
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="inputAreaDangerRating" id="inputAreaDangerRating2" value="option2" >
+                  <label class="form-check-label" for="inputAreaDangerRating2">
+                    Safe
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="inputAreaDangerRating" id="inputAreaDangerRating3" value="option3" >
+                  <label class="form-check-label" for="inputAreaDangerRating3">
+                    Unsure
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="inputAreaDangerRating" id="inputAreaDangerRating4" value="option4" >
+                  <label class="form-check-label" for="inputAreaDangerRating4">
+                    Unsafe
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="inputAreaDangerRating" id="inputAreaDangerRating5" value="option5" >
+                  <label class="form-check-label" for="inputAreaDangerRating5">
+                    Very Unsafe
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-4">
+          
+          <div class="row px-4">
+            <button type="cancel" onclick="formEnd()" class="col-sm-12 col-lg-6 btn btn-danger btn-lg">Cancel</button>
+            <button type="submit" onclick="formEnd()" class="col-sm-12 col-lg-6 btn btn-primary btn-lg">Submit</button>
+          </div>
+          
+        </form>
+    </div>
+  
+  </div>
+    
+</body>
