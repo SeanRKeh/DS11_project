@@ -127,45 +127,52 @@
             <i class="bi bi-x-lg"></i>
           </button>
           <div>
-            <h2 class="marker-title">
+            <h2 id="marker-title" class="marker-title">
               Cale Jane Sullivan Marker reports
             </h1>
-            <h5 class="marker-danger-rating">
+            <h5 id="marker-danger-rating" class="card-subtitle mb-2 text-muted marker-danger-rating">
               Current Danger Rating: 5
             </h5>
-            <h5 class="marker-area-recc">
+            <h5 id="marker-area-recc" class="marker-area-recc">
               Do we recommend going to this area: NO
             </h5>
           </div>
           <div class="data-vis-content">
             <!--Insert content here-->
-            <div class='tableauPlaceholder' id='viz1665398876907' style='position: relative' >
+            <div class='tableauPlaceholder' id='viz1665573653419' style='position: relative'>
               <noscript>
-                <a href='#'><img alt='OFFENCE LGA RATE REPORT ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;HY&#47;HYWBP9Z9K&#47;1_rss.png' style='border: none' /></a>
+                <a href='#'><img alt='OFFENCE LGA RATE REPORT ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Re&#47;Report_V2_test&#47;3&#47;1_rss.png' style='border: none' /></a>
               </noscript>
               <object class='tableauViz'  style='display:none;'>
                 <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
                 <param name='embed_code_version' value='3' /> 
-                <param name='path' value='shared&#47;HYWBP9Z9K' /> 
+                <param name='site_root' value='' />
+                <param name='name' value='Report_V2_test&#47;3' />
+                <param name='tabs' value='no' />
                 <param name='toolbar' value='yes' />
-                <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;HY&#47;HYWBP9Z9K&#47;1.png' /> 
+                <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Re&#47;Report_V2_test&#47;3&#47;1.png' /> 
                 <param name='animate_transition' value='yes' />
                 <param name='display_static_image' value='yes' />
                 <param name='display_spinner' value='yes' />
                 <param name='display_overlay' value='yes' />
                 <param name='display_count' value='yes' />
                 <param name='language' value='en-US' />
+                <param name='device' value='mobile' />
+                <param name='device' value='desktop' />
               </object>
             </div>                
             <script type='text/javascript'>                    
-              var divElement = document.getElementById('viz1665398876907');                    
+              var divElement = document.getElementById('viz1665573653419');                    
               var vizElement = divElement.getElementsByTagName('object')[0];                    
               if ( divElement.offsetWidth > 800 ) { 
-                vizElement.style.width='1200px';vizElement.style.height='1227px';
-              } else if ( divElement.offsetWidth > 500 ) {
-                vizElement.style.width='1200px';vizElement.style.height='1227px';
+                vizElement.style.width='1200px';
+                vizElement.style.height='1227px';
+              } else if ( divElement.offsetWidth > 500 ) { 
+                vizElement.style.width='1200px';
+                vizElement.style.height='1227px';
               } else { 
-                vizElement.style.width='100%';vizElement.style.height='2027px';
+                vizElement.style.width='100%';
+                vizElement.style.height='2027px';
               }                     
               var scriptElement = document.createElement('script');                    
               scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
@@ -182,6 +189,8 @@
           <div class="leaflet-control userbuttons">
             <button type="button" onclick= "reportClicked()" class="btn btn-primary btn-circle reportbtn">Report</button>
             <button type="button" onclick = "reviewClicked()" class="btn btn-primary btn-circle reviewbtn">Review</button>
+            <h2 id="DRating">0.0000</h2>
+            <h5>Safety Rating</h5>
           </div>
         </div>
 
@@ -189,119 +198,9 @@
         <!-------------------------------------------------------------->
         <!-------------------------------------------------------------->
         <!-------------------------------------------------------------->
-        <!-- Report Form -->
-        <div class="container" id="reportForm" style="display: none;">
 
-          <div class="py-4 text-center">
-            <h4>Report a crime</h4>
-          </div>
-          <div class="row g-4 p-3 border">
-              <form>
-                <div class="row g-3">
-                  <div class="col-12">
-                    <label class= "form-label" for="inputTitle">Describe your situation</label>
-                    <input type="title" class="form-control" id="inputTitle" aria-describedby="titleHelp" placeholder="e.g. I am being followed...." required>
-                    
-                  </div>
-                
-                  <div class="col-12">
-                    <label class= "form-label" for="inputDescription">Description</label>
-                    <textarea type="description" class="form-control" id="inputDescription" placeholder="Description of the emergency" rows="4" required></textarea>
-                
-                  </div>
-      
-                </div>
-      
-                <hr class="my-4">
-      
-                <div class="row g-3">
-                  <div class="col-12">
-                    <label class="form-label" for="inputDangerRating">How safe do you feel in this situation?</label>
-      
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="inputDangerRating" id="inputDangerRating1" value="option1" checked>
-                      <label class="form-check-label" for="inputDangerRating1">
-                        Very Safe
-                      </label>
-                    </div>
-                    <div class=" form-check">
-                      <input class="form-check-input" type="radio" name="inputDangerRating" id="inputDangerRating2" value="option2" >
-                      <label class="form-check-label" for="inputDangerRating2">
-                        Safe
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="inputDangerRating" id="inputDangerRating3" value="option3" >
-                      <label class="form-check-label" for="inputDangerRating3">
-                        Unsure
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="inputDangerRating" id="inputDangerRating4" value="option4" >
-                      <label class="form-check-label" for="inputDangerRating4">
-                        Unsafe
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="inputDangerRating" id="inputDangerRating5" value="option5" >
-                      <label class="form-check-label" for="inputDangerRating5">
-                        Very Unsafe
-                      </label>
-                    </div>
-                  </div>
-      
-                  <div class="col-12">
-                    <div class="form-group">
-                      <label class="form-label" for="inputAreaDangerRating">How safe would you feel navigting this area in the future?</label>
-      
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="inputAreaDangerRating" id="inputAreaDangerRating1" value="option1" checked>
-                        <label class="form-check-label" for="inputAreaDangerRating1">
-                          Very Safe
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="inputAreaDangerRating" id="inputAreaDangerRating2" value="option2" >
-                        <label class="form-check-label" for="inputAreaDangerRating2">
-                          Safe
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="inputAreaDangerRating" id="inputAreaDangerRating3" value="option3" >
-                        <label class="form-check-label" for="inputAreaDangerRating3">
-                          Unsure
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="inputAreaDangerRating" id="inputAreaDangerRating4" value="option4" >
-                        <label class="form-check-label" for="inputAreaDangerRating4">
-                          Unsafe
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="inputAreaDangerRating" id="inputAreaDangerRating5" value="option5" >
-                        <label class="form-check-label" for="inputAreaDangerRating5">
-                          Very Unsafe
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-      
-                <hr class="my-4">
-                
-                <div class="row px-4">
-                  <button type="cancel" onclick="formEnd()" class="col-sm-12 col-lg-6 btn btn-danger btn-lg">Cancel</button>
-                  <button type="submit" onclick="formEnd()" class="col-sm-12 col-lg-6 btn btn-primary btn-lg">Submit</button>
-                </div>
-                
-              </form>
-          </div>
-        
-        </div>
-
-         <!-- Review Form (yet to be added) -->
-         <!-- .... -->
+        <!-- Review Form -->
+        <!-- .... 
         <div class="container" id="reviewForm" style="display: none;">
 
           <div class="py-4 text-center">
@@ -367,7 +266,8 @@
                 
               </form>
           </div>
-          </div>
+        </div>
+        -->
 
           
       </body>
@@ -397,13 +297,11 @@
               document.documentElement.scrollTop = 0;
             }
             */
+            
+            var user_coord = 0;
 
             const policeMarkerData = {{policeStations | tojson}};
-            for (let i = 0; i < policeMarkerData.length; i++) {
-              
-              console.log(policeMarkerData[i])
-            } 
-
+            const reportMarkerData = {{reports | tojson}};
             
 
             //---------------------------------------------------------------
@@ -411,10 +309,28 @@
             //---------------------------------------------------------------
             //Create and initialize map
             var map = L.map('map', {
-              center: [-37.815, 144.964],
-              zoom: 13,
+              // center: [-37.815, 144.964],
+              center: [-37.813, 144.957],
+              zoom: 17,
+              minZoom: 5,
+              maxZoom: 17,
               fullscreenControl: true,
             });
+
+            const ini_bounds = map.getBounds();
+            var ini_cnt = 0
+            for (let i = 0; i < policeMarkerData.length; i++) {
+              const curr_lat = policeMarkerData[i][7];
+              const curr_lng = policeMarkerData[i][8];
+              if (curr_lat >= ini_bounds._southWest.lat && curr_lat <= ini_bounds._northEast.lat && curr_lng >= ini_bounds._southWest.lng && curr_lng <= ini_bounds._northEast.lng) {
+                ini_cnt++
+              }
+            };
+
+            const ini_boundarea = (ini_bounds._northEast.lat - ini_bounds._southWest.lat) * (ini_bounds._northEast.lng - ini_bounds._southWest.lng)
+            const pol_dense = ini_cnt/ini_boundarea;
+            
+            updateInfo();
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
               maxZoom: 19,
@@ -557,6 +473,8 @@
 
                 // add class to marker
                 L.DomUtil.addClass(marker._icon, "leaflet-marker-locate");
+
+                console.log(user_coord);
               },
 
               // the method presents no results
@@ -566,7 +484,8 @@
 
             L.control.scale().addTo(map);
             
-            var marker = L.marker([-37.815, 144.964]).addTo(map);
+            // var marker = L.marker([-37.815, 144.964]).addTo(map);
+            var marker = L.marker([-35, 143]).addTo(map);
             marker.bindPopup("<b>Hello world!</b><br>I am a centre popup.");
 
             //Bind the markerMenu function to this marker (for testing purposes)
@@ -590,18 +509,59 @@
             //---------------------------------------------------------------
             //---------------------------------------------------------------
             //---------------------------------------------------------------
+            //The report markers
+            //Create a custom report marker
+            reportMarker = L.Marker.extend({
+            options: { 
+                title: 'title',
+                description: 'description',
+                datetime: 'datetime',
+                suburb_id: 'suburb_id',
+                safety_level: 'safety_level',
+                willingness_to_return: 'willingness_to_return'
+              }
+            });
+
+            for (let i = 0; i < reportMarkerData.length; i++) {
+              
+              var repMarker = new reportMarker([reportMarkerData[i][5], reportMarkerData[i][6]], { 
+                  title: reportMarkerData[i][1],
+                  description: reportMarkerData[i][2],
+                  datetime: reportMarkerData[i][3],
+                  suburb_id: reportMarkerData[i][4],
+                  safety_level: reportMarkerData[i][7],
+                  willingness_to_return: reportMarkerData[i][8]
+              });
+              repMarker.addTo(map);
+              repMarker.on("click", openMarkerMenu);
+              console.log(repMarker);
+            }
+             
+
+            //---------------------------------------------------------------
+            //---------------------------------------------------------------
+            //---------------------------------------------------------------
             //The popup marker (for when a non-police marker is clicked) code
             
             //Function to open/close the marker
             function openMarkerMenu(e){
-              target = e.target
+              target = e.target;
               
+              var title = document.getElementById('marker-title');
+              var dangerRating = document.getElementById('marker-danger-rating');
+              var areaRecc = document.getElementById('marker-area-recc');
+
+              title.innerHTML=target.options.title;
+              dangerRating.innerHTML = "Danger rating of report: "+target.options.safety_level;
+              areaRecc.innerHTML = "Willingness to return to the area: "+target.options.willingness_to_return;
+              
+
               if (
                 document.body.classList.contains("active-marker-popup")
                 ) {
                   document.body.classList.remove("active-marker-popup");
               } else {
-                  document.body.classList.add("active-marker-popup")
+                  document.body.classList.add("active-marker-popup");
               }
                 
             }
@@ -619,15 +579,32 @@
 
             //When report/review buttons are clicked
             function reportClicked() {
-              document.getElementById('map').style.display = "none";
-              document.getElementById('reportForm').style.display = "";
+
+
+              //coordinates to send
+              var coordToSend = {
+                lat : user_coord.lat,
+                lon : user_coord.lng
+              };
+              const params = new URLSearchParams({
+                lat: user_coord.lat,
+                lng: user_coord.lng,
+              });
+              console.log(params)
+              window.location.replace("/reportform"+"?"+params.toString());
+
             }
             
+            function reviewClicked() {
+              window.location.replace("/reviewform");
+            }
+
+            /*
             function reviewClicked() {
               document.getElementById('map').style.display = "none";
               document.getElementById('reviewForm').style.display = "";
             }
-
+            */
 
             //When any buttons on report/review forms are clicked
             function formEnd() {
@@ -651,7 +628,100 @@
               L.marker([policeMarkerData[i][7], policeMarkerData[i][8]], {icon:PoliceIcon}).addTo(map).bindPopup('<b>'+policeMarkerData[i][1]+' police station</b><br>'+'Address: '+policeMarkerData[i][3]+'<br>Phone Number: '+policeMarkerData[i][6])
             } 
 
+            
+            //---------------------------------------------------------------
+            //---------------------------------------------------------------
+            //---------------------------------------------------------------
+            //current location
+            map
+              .locate({
+                // https://leafletjs.com/reference-1.7.1.html#locate-options-option
+                setView: true,
+                enableHighAccuracy: true,
+              })
+              // if location found show marker and circle
+              .on("locationfound", (e) => {
+                console.log(e);
+                // marker
+                user_coord = e.latlng;
+                const marker = L.marker([e.latitude, e.longitude]).bindPopup(
+                  // "You are within " + e.accuracy + " metres from here"
+                  "You are here"
+                );
+                // circle
+                const circle = L.circle([e.latitude, e.longitude], e.accuracy / 2, {
+                  weight: 2,
+                  color: "red",
+                  fillColor: "red",
+                  fillOpacity: 0.1,
+                });
+                // add marker
+                // map.addLayer(marker);
+                updateInfo();
+                // add circle
+                // map.addLayer(circle);
+                // setview custom
+                // map.setView(center = [e.latitude, e.longitude], 13)
+              })
+              // if error show alert
+              .on("locationerror", (e) => {
+                console.log(e);
+                alert("Location access denied.");
+              });
 
+            map.on("dragend", updateInfo);
+            map.on("zoomend", updateInfo);
+
+            function updateInfo() {
+              const bounds = map.getBounds();
+              var cnt = 0
+              for (let i = 0; i < policeMarkerData.length; i++) {
+                const pol_lat = policeMarkerData[i][7];
+                const pol_lng = policeMarkerData[i][8];
+                if (pol_lat >= bounds._southWest.lat && pol_lat <= bounds._northEast.lat && pol_lng >= bounds._southWest.lng && pol_lng <= bounds._northEast.lng) {
+                  cnt++
+                }
+              };
+
+              const boundarea = (bounds._northEast.lat - bounds._southWest.lat) * (bounds._northEast.lng - bounds._southWest.lng)
+              // console.log(bounds);
+              console.log((cnt/boundarea)/pol_dense);
+
+              const rep_safety_arr = [];
+              const rep_again_arr = [];
+              for (let i = 0; i < reportMarkerData.length; i++) {
+                const rep_lat = parseFloat(reportMarkerData[i][5]);
+                const rep_lng = parseFloat(reportMarkerData[i][6]);
+                if (rep_lat >= bounds._southWest.lat && rep_lat <= bounds._northEast.lat && rep_lng >= bounds._southWest.lng && rep_lng <= bounds._northEast.lng) {
+                  rep_safety_arr.push(5-reportMarkerData[i][7]);
+                  rep_again_arr.push(5-reportMarkerData[i][8]);
+                }
+              }
+
+              console.log(rep_safety_arr);
+              console.log(rep_again_arr);
+
+              var pol_safety = (Math.log10(((cnt/boundarea)/pol_dense) + 0.01)+2)*5;
+              var rep_safety = ((rep_safety_arr.reduce((a,b) => a + b, 0) / rep_safety_arr.length)/4)*10;
+              var rep_again = ((rep_again_arr.reduce((a,b) => a + b, 0) / rep_again_arr.length)/4)*10;
+              var rev_safety = 0
+              var crime_ave = 0
+
+              if (isNaN(rep_safety)) {
+                rep_safety = 0
+              }
+
+              if (isNaN(rep_again)) {
+                rep_again = 0
+              }
+
+              if (isNaN(rev_safety)) {
+                rev_safety = 0
+              }
+
+              const tot_safety = 0 * pol_safety + 0 * rep_safety + 1 * rep_again + 0 * rev_safety + 0 * crime_ave;
+              document.getElementById("DRating").innerHTML = tot_safety.toFixed(2);
+            }
             
             //---------------------------------------------------------------
             //---------------------------------------------------------------
