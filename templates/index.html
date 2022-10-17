@@ -8,10 +8,11 @@
         <!-- Bootstap icons-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
-        <!-- vegalite -->
+        <!-- vegalite 
         <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
         <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
         <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+        -->
 
         <!-- leaflet -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
@@ -48,21 +49,25 @@
 
       .marker-close-button {
         cursor: pointer;
-        position: absolute;
-        top: 30px;
-        right: 40px;
+        
         border: none;
         padding: 5px;
         font-size: 35px;
         -webkit-text-stroke: 1px rgb(0, 0, 0);
         margin: 0;
-        padding: 0;
+        padding-left: 10px;
         border-radius: 3px;
         background: none;
-        opacity: 0;
       }
 
-      .active-marker-popup .marker-close-button {
+      .marker-buttons {
+        top: 30px;
+        right: 40px;
+        position: absolute;
+        display: flex;
+      }
+
+      .active-marker-popup .marker-close-button .marker-buttons {
         opacity: 1;
       }
 
@@ -103,7 +108,7 @@
           
           right:50%;
         }
-        /* This is used to control where the leaflet-bottom controls go once the marker is clicked (its active).... feel free to comment this code snippet out to see it in action*/
+        /* This is used to control where the leaflet-bottom controls go once the marker is clicked (its active)
         /*
         .active-marker-popup .leaflet-bottom {
           transform: translateY(-485px);
@@ -123,61 +128,50 @@
         <!-------------------------------------------------------------->
         <!-- Create popup when a non-police marker is clicked-->
         <div class="marker-popup">
-          <button class="marker-close-button" onclick= "markerClose()">
-            <i class="bi bi-x-lg"></i>
-          </button>
-          <div>
-            <h2 id="marker-title" class="marker-title">
-              Cale Jane Sullivan Marker reports
-            </h1>
-            <h5 id="marker-danger-rating" class="card-subtitle mb-2 text-muted marker-danger-rating">
-              Current Danger Rating: 5
-            </h5>
-            <h5 id="marker-area-recc" class="marker-area-recc">
-              Do we recommend going to this area: NO
-            </h5>
+          <div class="marker-buttons">
+            <a id="crime-vis" href="" target="_blank">
+              <button type="button" class="btn btn-primary">Crimes in this area</button>
+            </a>
+            <button class="marker-close-button" onclick= "markerClose()">
+              <i class="bi bi-x-lg"></i>
+            </button>
           </div>
-          <div class="data-vis-content">
-            <!--Insert content here-->
-            <div class='tableauPlaceholder' id='viz1665573653419' style='position: relative'>
-              <noscript>
-                <a href='#'><img alt='OFFENCE LGA RATE REPORT ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Re&#47;Report_V2_test&#47;3&#47;1_rss.png' style='border: none' /></a>
-              </noscript>
-              <object class='tableauViz'  style='display:none;'>
-                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
-                <param name='embed_code_version' value='3' /> 
-                <param name='site_root' value='' />
-                <param name='name' value='Report_V2_test&#47;3' />
-                <param name='tabs' value='no' />
-                <param name='toolbar' value='yes' />
-                <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Re&#47;Report_V2_test&#47;3&#47;1.png' /> 
-                <param name='animate_transition' value='yes' />
-                <param name='display_static_image' value='yes' />
-                <param name='display_spinner' value='yes' />
-                <param name='display_overlay' value='yes' />
-                <param name='display_count' value='yes' />
-                <param name='language' value='en-US' />
-                <param name='device' value='mobile' />
-                <param name='device' value='desktop' />
-              </object>
-            </div>                
-            <script type='text/javascript'>                    
-              var divElement = document.getElementById('viz1665573653419');                    
-              var vizElement = divElement.getElementsByTagName('object')[0];                    
-              if ( divElement.offsetWidth > 800 ) { 
-                vizElement.style.width='1200px';
-                vizElement.style.height='1227px';
-              } else if ( divElement.offsetWidth > 500 ) { 
-                vizElement.style.width='1200px';
-                vizElement.style.height='1227px';
-              } else { 
-                vizElement.style.width='100%';
-                vizElement.style.height='2027px';
-              }                     
-              var scriptElement = document.createElement('script');                    
-              scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
-              vizElement.parentNode.insertBefore(scriptElement, vizElement);                
-            </script>
+          
+          <div>
+            
+            <h2 class="card-title" style="font-size: 40px; padding-bottom: 30px">
+              Report marker
+            </h2>
+           
+          </div>
+          <div class="data-vis-content" style="height: 100%">
+            
+            <div class="row marker-body" style="height: 90%">
+              <div class="col my-3" style="height: 100%">
+                <div class="card">
+                <div class="card-body">
+                  <h2 id="marker-title" class="card-title">
+                    Cale Jane Sullivan Marker reports
+                  </h1>
+                  <h5 id="marker-danger-rating" class="card-text">
+                    Danger rating of report: 5
+                  </h5>
+                  <h5 id="marker-area-recc" class="card-text">
+                    Willingness to return to the area: 5
+                  </h5>
+                  <p id="marker-description" class="card-text">
+                    Dangerous/aggressive drivers
+                  </p>
+                </div>  
+              </div>
+              </div>
+              <div id="review-container" class="col" style="height: 100%; overflow-y: scroll">
+                
+                
+              </div>
+
+            </div>
+            
           </div>
         </div>
 
@@ -189,85 +183,10 @@
           <div class="leaflet-control userbuttons">
             <button type="button" onclick= "reportClicked()" class="btn btn-primary btn-circle reportbtn">Report</button>
             <button type="button" onclick = "reviewClicked()" class="btn btn-primary btn-circle reviewbtn">Review</button>
-            <h2 id="DRating">0.0000</h2>
+            <h2 id="DRating">0.00</h2>
             <h5>Safety Rating</h5>
           </div>
         </div>
-
-
-        <!-------------------------------------------------------------->
-        <!-------------------------------------------------------------->
-        <!-------------------------------------------------------------->
-
-        <!-- Review Form -->
-        <!-- .... 
-        <div class="container" id="reviewForm" style="display: none;">
-
-          <div class="py-4 text-center">
-            <h4>Write a review</h4>
-          </div>
-          <div class="row g-4 p-3 border">
-              <form>
-                <div class="row g-3">                
-                  <div class="col-12">
-                    <label class= "form-label" for="inputDescription">How do you feel about this area</label>
-                    <textarea type="description" class="form-control" id="inputDescription" placeholder="e.g. I have been in this area for ... and ..." rows="4" required></textarea>
-                  </div>
-      
-                </div>
-      
-                <hr class="my-4">
-      
-                <div class="row g-3">
-                  <div class="col-12">
-                  <div class="form-group">
-                    <label class="form-label" for="inputAreaDangerRating">How safe would you rate this area (1 - least safe): </label>
-                    <br>
-    
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inputSafetyRating" id="inputSafetyRating1" value="option1" checked>
-                      <label class="form-check-label" for="inputSafetyRating1">
-                        1
-                      </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inputSafetyRating" id="inputSafetyRating2" value="option2" >
-                      <label class="form-check-label" for="inputSafetyRating2">
-                        2
-                      </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inputSafetyRating" id="inputSafetyRating3" value="option3" >
-                      <label class="form-check-label" for="inputSafetyRating3">
-                        3
-                      </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inputSafetyRating" id="inputSafetyRating4" value="option4" >
-                      <label class="form-check-label" for="inputSafetyRating4">
-                        4
-                      </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inputSafetyRating" id="inputSafetyRating5" value="option5" >
-                      <label class="form-check-label" for="inputSafetyRating5">
-                        5
-                      </label>
-                    </div>
-                  </div>
-                </div>
-      
-                <hr class="my-4">
-                
-                <div class="row px-4">
-                  <button type="cancel" onclick="formEnd()" class="col-sm-12 col-lg-6 btn btn-danger btn-lg">Cancel</button>
-                  <button type="submit" onclick="formEnd()" class="col-sm-12 col-lg-6 btn btn-primary btn-lg">Submit</button>
-                </div>
-                
-              </form>
-          </div>
-        </div>
-        -->
 
           
       </body>
@@ -302,6 +221,23 @@
 
             const policeMarkerData = {{policeStations | tojson}};
             const reportMarkerData = {{reports | tojson}};
+            const reviewMarkerData = {{reviews | tojson}};
+            const suburbData = {{suburbs | tojson}};
+            const sublgaData = {{subLGAs | tojson}}
+            const crimeData = {{crimes | tojson}};
+            
+            // console.log(reviewMarkerData);
+            // console.log(suburbData);
+            // console.log(sublgaData);
+            // console.log(crimeData);
+
+            var sublgaDict = {};
+            sublgaData.forEach(el => sublgaDict[el[0]] = el[1]);
+            // console.log(sublgaDict);
+
+            var crimeDict = {};
+            crimeData.forEach(el => crimeDict[el[0]] = el[1]);
+            // console.log(crimeDict);
             
 
             //---------------------------------------------------------------
@@ -546,15 +482,62 @@
             //Function to open/close the marker
             function openMarkerMenu(e){
               target = e.target;
-              
+              console.log(target);
+
               var title = document.getElementById('marker-title');
               var dangerRating = document.getElementById('marker-danger-rating');
               var areaRecc = document.getElementById('marker-area-recc');
+              var vislink = document.getElementById('crime-vis');
+              var description = document.getElementById('marker-description');
+              var revContainer = document.getElementById('review-container');
 
+              // sublgaDict[target.options.suburb_id]
+
+              console.log(target.options.suburb_id);
+              
               title.innerHTML=target.options.title;
               dangerRating.innerHTML = "Danger rating of report: "+target.options.safety_level;
               areaRecc.innerHTML = "Willingness to return to the area: "+target.options.willingness_to_return;
+              vislink.href = "https://public.tableau.com/views/Report_V2_test/3?:embed=y&:showVizHome=no&:host_url=https%3A%2F%2Fpublic.tableau.com%2F&:embed_code_version=3&:tabs=no&:toolbar=yes&:animate_transition=yes&:display_static_image=no&:display_spinner=no&:display_overlay=yes&:display_count=yes&:language=en-US&:device=desktop&Local%20Government%20Area="+sublgaDict[target.options.suburb_id]+"&:loadOrderID=0";
+              description.innerHTML = target.options.description;
+
+            
+              //Get review list numbers
+              var reviewList = []
+              console.log(reviewMarkerData);
+              for (let i = 0; i < reviewMarkerData.length; i++) {
+                if (reviewMarkerData[i][4] == target.options.suburb_id){
+                  reviewList.push(reviewMarkerData[i])
+                }
+              }
+
+              console.log(reviewList);
               
+              while (revContainer.hasChildNodes()) {
+                revContainer.removeChild(revContainer.firstChild);
+              }
+              
+              for (let i = 0; i < reviewList.length; i++) {
+                
+                var xmlString = "<div id='outRev' class='my-3 card'> <div class='card-body'> <h2 id='rev-title' class='card-title'>Cale Jane Sullivan Marker reports</h2> <p id='rev-description' class='card-text'>Dangerous/aggressive drivers</p> <h6 id='rev-danger-rating' class='card-text'>Area Rating: 5</h6></div>  </div>";
+                var revHtml = new DOMParser().parseFromString(xmlString, "text/html");
+
+                var revtitle = revHtml.getElementById('rev-title');
+                var revrating = revHtml.getElementById('rev-danger-rating');
+                var revdesc = revHtml.getElementById('rev-description');
+
+                
+                revtitle.innerHTML=reviewList[i][1];
+                revdesc.innerHTML = reviewList[i][2];
+                revrating.innerHTML = "Review safety rating: " + reviewList[i][5];
+
+                revContainer.appendChild(revHtml.getElementById('outRev'));
+
+              }
+
+               
+
+
 
               if (
                 document.body.classList.contains("active-marker-popup")
@@ -567,7 +550,7 @@
             }
             //Function to close a marker popup using the close appeneded close button
             function markerClose(){
-            
+              
               document.body.classList.remove("active-marker-popup");
               
             }
@@ -596,7 +579,18 @@
             }
             
             function reviewClicked() {
-              window.location.replace("/reviewform");
+              //coordinates to send
+              var coordToSend = {
+                lat : user_coord.lat,
+                lon : user_coord.lng
+              };
+              const params = new URLSearchParams({
+                lat: user_coord.lat,
+                lng: user_coord.lng,
+              });
+              console.log(params)
+              window.location.replace("/reviewform"+"?"+params.toString());
+
             }
 
             /*
@@ -685,7 +679,7 @@
 
               const boundarea = (bounds._northEast.lat - bounds._southWest.lat) * (bounds._northEast.lng - bounds._southWest.lng)
               // console.log(bounds);
-              console.log((cnt/boundarea)/pol_dense);
+              // console.log((cnt/boundarea)/pol_dense);
 
               const rep_safety_arr = [];
               const rep_again_arr = [];
@@ -698,28 +692,72 @@
                 }
               }
 
-              console.log(rep_safety_arr);
-              console.log(rep_again_arr);
+              // console.log(rep_safety_arr);
+              // console.log(rep_again_arr);
+
+              const curr_subs = [];
+              var curr_lgas = [];
+              for (let i = 0; i < suburbData.length; i++) {
+                const sub_lat = parseFloat(suburbData[i][1]);
+                const sub_lng = parseFloat(suburbData[i][2]);
+                if (sub_lat >= bounds._southWest.lat && sub_lat <= bounds._northEast.lat && sub_lng >= bounds._southWest.lng && sub_lng <= bounds._northEast.lng) {
+                  curr_subs.push(suburbData[i][0]);
+                  curr_lgas.push(sublgaDict[suburbData[i][0]]);
+                }
+              }
+
+              curr_lgas = [...new Set(curr_lgas)];
+              curr_lgas = curr_lgas.filter(el => {return el !== undefined;});
+
+              // console.log(curr_subs);
+              // console.log(curr_lgas);
+
+              const rev_safety_arr = [];
+              for (let i = 0; i < reviewMarkerData.length; i++) {
+                if (curr_subs.includes(reviewMarkerData[i][4])) {
+                  rev_safety_arr.push(reviewMarkerData[i][5]-1);
+                }
+              }            
+              
+              // console.log(rev_safety_arr);
+
+              const crime_safety_arr = [];
+              for (let i = 0; i < curr_lgas.length; i++) {
+                crime_safety_arr.push(crimeDict[curr_lgas[i]]);
+              }
+
+              // console.log(crime_safety_arr);
+              // console.log(Math.max(...Object.values(crimeDict)));
 
               var pol_safety = (Math.log10(((cnt/boundarea)/pol_dense) + 0.01)+2)*5;
               var rep_safety = ((rep_safety_arr.reduce((a,b) => a + b, 0) / rep_safety_arr.length)/4)*10;
               var rep_again = ((rep_again_arr.reduce((a,b) => a + b, 0) / rep_again_arr.length)/4)*10;
-              var rev_safety = 0
-              var crime_ave = 0
+              var rev_safety = ((rev_safety_arr.reduce((a,b) => a + b, 0) / rev_safety_arr.length)/4)*10;
+              var crime_ave = 10-((crime_safety_arr.reduce((a,b) => a + b, 0) / crime_safety_arr.length)/Math.max(...Object.values(crimeDict)))*10;
 
               if (isNaN(rep_safety)) {
-                rep_safety = 0
+                rep_safety = 5
               }
 
               if (isNaN(rep_again)) {
-                rep_again = 0
+                rep_again = 5
               }
 
               if (isNaN(rev_safety)) {
-                rev_safety = 0
+                rev_safety = 5
               }
 
-              const tot_safety = 0 * pol_safety + 0 * rep_safety + 1 * rep_again + 0 * rev_safety + 0 * crime_ave;
+              if (isNaN(crime_ave)) {
+                crime_ave = 5
+              }
+
+              console.log("pol_safety", pol_safety);
+              console.log("rep_safety", rep_safety);
+              console.log("rep_again", rep_again);
+              console.log("rev_safety", rev_safety);
+              console.log("crime_ave", crime_ave);
+
+              const tot_safety = 0.2 * pol_safety + 0.2 * rep_safety + 0.2 * rep_again + 0.2 * rev_safety + 0.2 * crime_ave;
               document.getElementById("DRating").innerHTML = tot_safety.toFixed(2);
             }
             
@@ -727,6 +765,7 @@
             //---------------------------------------------------------------
             //---------------------------------------------------------------
             //vegalite things
+            /*
             vega.scheme('Tol_muted', ['#88ccee', '#44aa99', '#117733', '#332288', '#ddcc77', '#999933', '#cc6677', '#882255', '#aa4499', '#dddddd']);
             vega.scheme('Tol_light', ['#bbcc33', '#aaaa00', '#77aadd', '#ee8866', '#ddcc77', '#eedd88', '#ffaabb', '#99ddff', '#44bb99', '#dddddd']);
           
@@ -734,6 +773,7 @@
             vegaEmbed('#Info_bubble', bubble, {"actions": false}).then(function(result) {
               // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
             }).catch(console.error);
+            */
             
           </script>
     </body>
