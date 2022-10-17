@@ -5,14 +5,8 @@
         Replaced with a more updated (version 5.2.1) of bootstrap-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
-        <!-- Bootstap icons-->
+        <!-- Bootstrap icons-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-
-        <!-- vegalite 
-        <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
-        -->
 
         <!-- leaflet -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
@@ -41,87 +35,7 @@
         <title>DS11 Web App</title>
     </head>
 
-    <style>
-      /*The styles here are used for test purposes*/
-
-      /*Marker clicked popup*/
-
-
-      .marker-close-button {
-        cursor: pointer;
-        
-        border: none;
-        padding: 5px;
-        font-size: 35px;
-        -webkit-text-stroke: 1px rgb(0, 0, 0);
-        margin: 0;
-        padding-left: 10px;
-        border-radius: 3px;
-        background: none;
-      }
-
-      .marker-buttons {
-        top: 30px;
-        right: 40px;
-        position: absolute;
-        display: flex;
-      }
-
-      .active-marker-popup .marker-close-button .marker-buttons {
-        opacity: 1;
-      }
-
-      .active-marker-popup .marker-popup {
-        max-width: 768px;
-        right: 0%;
-        z-index: 99999;
-        bottom: 0px;
-      }
-
-      .marker-popup{
-        position: absolute;
-        background-color:#fff;
-        max-height: 600px;
-        height: 100%;
-        overflow: hidden;
-        display: none;
-        transform:translate(0%);
-        padding: 35px 55px;
-        border-radius: 30px 30px 0 0;
-        font-family: 'Poppins',sans-serif;
-        border: 5px solid rgba(17, 17, 17, 0.3)
-      }
-
-      @media (min-width: 768px) {
-        .marker-popup {
-          transition: transform 0.3s ease-in-out;
-          transform:translate(50%);
-        }
-
-        .active-marker-popup .marker-popup {
-          max-height: 600px;
-          height: 100%;
-          max-width: 1100px;
-          width: 100%;
-          display: block;
-          transition: transform 0.3 ease-in-out;
-          
-          right:50%;
-        }
-        /* This is used to control where the leaflet-bottom controls go once the marker is clicked (its active)
-        /*
-        .active-marker-popup .leaflet-bottom {
-          transform: translateY(-485px);
-          transition: transform 350ms;
-        }
-        */
-      }
-
-    </style>
     <body>
-        <!-- doesn't work btw 
-        <button onclick="BackToTop()" id="topbtn">Up</button>
-        -->
 
         <!-------------------------------------------------------------->
         <!-------------------------------------------------------------->
@@ -191,32 +105,7 @@
           
       </body>
 
-        <!-- This is for test purposes
-        <iframe src="{{ url_for('static', filename= 'html/reportform.html') }}" title="Report Form">
-        </iframe>
-        -->
-
-        <!--
-        <div id="Info_bubble"></div>
-        -->
-
-        <script type="text/javascript">
-            /* doesn't work btw 
-            topbtn = document.getElementById("topbtn");
-            window.onscroll = function() {scrollFunction()};
-            function scrollFunction() {
-              if (document.body.scrollTop > 260 || document.documentElement.scrollTop > 260) {
-                topbtn.style.display = "block";
-              } else {
-                topbtn.style.display = "block";
-              }
-            }
-
-            function BackToTop() {
-              document.documentElement.scrollTop = 0;
-            }
-            */
-            
+        <script type="text/javascript">            
             var user_coord = 0;
 
             const policeMarkerData = {{policeStations | tojson}};
@@ -277,7 +166,7 @@
             //---------------------------------------------------------------
             //---------------------------------------------------------------
             // --------------------------------------------------------------
-            // create seearch button
+            // create search button
 
             // add "random" button
             const buttonTemplate = `<div class="auto-search-wrapper max-height"><input type="text" id="marker" autocomplete="off"  aria-describedby="instruction" aria-label="Search ..." /><div id="instruction" class="hidden">When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.</div></div>`;
@@ -410,7 +299,7 @@
                 // add class to marker
                 L.DomUtil.addClass(marker._icon, "leaflet-marker-locate");
 
-                console.log(user_coord);
+                // console.log(user_coord);
               },
 
               // the method presents no results
@@ -426,21 +315,6 @@
 
             //Bind the markerMenu function to this marker (for testing purposes)
             marker.on("click", openMarkerMenu);
-
-            /* old search
-            var geocoder = L.Control.geocoder({
-              defaultMarkGeocode: false,
-              collapsed: false,
-              showUniqueResult: false,
-              showResultIcons: true,
-            })
-              .on('markgeocode', function(e) {
-                map.setView(center = e.geocode.center,16)
-                var marker2 = L.marker(e.geocode.center).addTo(map);
-                marker2.bindPopup(e.geocode.name).openPopup();
-              })
-              .addTo(map);
-            */
 
             //---------------------------------------------------------------
             //---------------------------------------------------------------
@@ -470,7 +344,7 @@
               });
               repMarker.addTo(map);
               repMarker.on("click", openMarkerMenu);
-              console.log(repMarker);
+              // console.log(repMarker);
             }
              
 
@@ -482,7 +356,7 @@
             //Function to open/close the marker
             function openMarkerMenu(e){
               target = e.target;
-              console.log(target);
+              // console.log(target);
 
               var title = document.getElementById('marker-title');
               var dangerRating = document.getElementById('marker-danger-rating');
@@ -493,7 +367,7 @@
 
               // sublgaDict[target.options.suburb_id]
 
-              console.log(target.options.suburb_id);
+              // console.log(target.options.suburb_id);
               
               title.innerHTML=target.options.title;
               dangerRating.innerHTML = "Danger rating of report: "+target.options.safety_level;
@@ -504,14 +378,14 @@
             
               //Get review list numbers
               var reviewList = []
-              console.log(reviewMarkerData);
+              // console.log(reviewMarkerData);
               for (let i = 0; i < reviewMarkerData.length; i++) {
                 if (reviewMarkerData[i][4] == target.options.suburb_id){
                   reviewList.push(reviewMarkerData[i])
                 }
               }
 
-              console.log(reviewList);
+              // console.log(reviewList);
               
               while (revContainer.hasChildNodes()) {
                 revContainer.removeChild(revContainer.firstChild);
@@ -532,8 +406,7 @@
                 revrating.innerHTML = "Review safety rating: " + reviewList[i][5];
 
                 revContainer.appendChild(revHtml.getElementById('outRev'));
-
-              }
+              };
 
                
 
@@ -545,7 +418,7 @@
                   document.body.classList.remove("active-marker-popup");
               } else {
                   document.body.classList.add("active-marker-popup");
-              }
+              };
                 
             }
             //Function to close a marker popup using the close appeneded close button
@@ -573,7 +446,7 @@
                 lat: user_coord.lat,
                 lng: user_coord.lng,
               });
-              console.log(params)
+              // console.log(params)
               window.location.replace("/reportform"+"?"+params.toString());
 
             }
@@ -588,23 +461,9 @@
                 lat: user_coord.lat,
                 lng: user_coord.lng,
               });
-              console.log(params)
+              // console.log(params)
               window.location.replace("/reviewform"+"?"+params.toString());
 
-            }
-
-            /*
-            function reviewClicked() {
-              document.getElementById('map').style.display = "none";
-              document.getElementById('reviewForm').style.display = "";
-            }
-            */
-
-            //When any buttons on report/review forms are clicked
-            function formEnd() {
-              document.getElementById('map').style.display = "";
-              document.getElementById('reportForm').style.display = "none";
-              document.getElementById('reviewForm').style.display = "none";
             }
             
             //---------------------------------------------------------------
@@ -751,30 +610,17 @@
                 crime_ave = 5
               }
 
+              /*
               console.log("pol_safety", pol_safety);
               console.log("rep_safety", rep_safety);
               console.log("rep_again", rep_again);
               console.log("rev_safety", rev_safety);
               console.log("crime_ave", crime_ave);
+              */
 
               const tot_safety = 0.2 * pol_safety + 0.2 * rep_safety + 0.2 * rep_again + 0.2 * rev_safety + 0.2 * crime_ave;
               document.getElementById("DRating").innerHTML = tot_safety.toFixed(2);
-            }
-            
-            //---------------------------------------------------------------
-            //---------------------------------------------------------------
-            //---------------------------------------------------------------
-            //vegalite things
-            /*
-            vega.scheme('Tol_muted', ['#88ccee', '#44aa99', '#117733', '#332288', '#ddcc77', '#999933', '#cc6677', '#882255', '#aa4499', '#dddddd']);
-            vega.scheme('Tol_light', ['#bbcc33', '#aaaa00', '#77aadd', '#ee8866', '#ddcc77', '#eedd88', '#ffaabb', '#99ddff', '#44bb99', '#dddddd']);
-          
-            var bubble = "static/js/Info_bubble.vg.json";
-            vegaEmbed('#Info_bubble', bubble, {"actions": false}).then(function(result) {
-              // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-            }).catch(console.error);
-            */
-            
+            }            
           </script>
     </body>
 </html>

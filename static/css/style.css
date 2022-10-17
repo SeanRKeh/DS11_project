@@ -5,15 +5,6 @@ h1 {
     padding: 10px;
 }
 
-#Info_bubble {
-	top: 0px;
-	bottom: 100px; 
-	left: 100px;
-	right: 100px;
-	width: 90vw;
-	margin-bottom: 50px;
-}
-
 #map {
 	height: 100vh;
 	width: 100%;
@@ -34,7 +25,6 @@ body {
 	bottom: 0;
 	justify-content: space-between;
 	flex-direction: column-reverse;
-	
 }
 
 .btn-circle {
@@ -49,25 +39,74 @@ body {
 	font-family:Arial, Helvetica, sans-serif;
 	font-size: large;
 	font-weight: bold;
-
 }
-/* doesn't work btw */
-#topbtn {
-	/*display: none;
-	position: fixed;*/
-	bottom: 20px;
-	left: 30px;
-	z-index: 99; /* Make sure it does not overlap */
-	border: none; /* Remove borders */
-	outline: none; /* Remove outline */
-	background-color: #c0b89bdc; /* Set a background color */
-	color: white; /* Text color */
-	cursor: pointer; /* Add a mouse pointer on hover */
-	padding: 15px; /* Some padding */
-	border-radius: 10px; /* Rounded corners */
-	font-size: 18px; /* Increase font size */
-  }
-  
-  #topbtn:hover {
-	background-color: #555; /* Add a dark-grey background on hover */
-  }
+
+.marker-close-button {
+	cursor: pointer;
+	
+	border: none;
+	padding: 5px;
+	font-size: 35px;
+	-webkit-text-stroke: 1px rgb(0, 0, 0);
+	margin: 0;
+	padding-left: 10px;
+	border-radius: 3px;
+	background: none;
+}
+
+.marker-buttons {
+	top: 30px;
+	right: 40px;
+	position: absolute;
+	display: flex;
+}
+
+.active-marker-popup .marker-close-button .marker-buttons {
+	opacity: 1;
+}
+
+.active-marker-popup .marker-popup {
+	max-width: 768px;
+	right: 0%;
+	z-index: 99999;
+	bottom: 0px;
+}
+
+.marker-popup{
+	position: absolute;
+	background-color:#fff;
+	max-height: 600px;
+	height: 100%;
+	overflow: hidden;
+	display: none;
+	transform:translate(0%);
+	padding: 35px 55px;
+	border-radius: 30px 30px 0 0;
+	font-family: 'Poppins',sans-serif;
+	border: 5px solid rgba(17, 17, 17, 0.3)
+}
+
+@media (min-width: 768px) {
+	.marker-popup {
+		transition: transform 0.3s ease-in-out;
+		transform:translate(50%);
+	}
+
+	.active-marker-popup .marker-popup {
+		max-height: 600px;
+		height: 100%;
+		max-width: 1100px;
+		width: 100%;
+		display: block;
+		transition: transform 0.3 ease-in-out;
+		
+		right:50%;
+	}
+	/* This is used to control where the leaflet-bottom controls go once the marker is clicked (its active)
+	/*
+	.active-marker-popup .leaflet-bottom {
+		transform: translateY(-485px);
+		transition: transform 350ms;
+	}
+	*/
+}

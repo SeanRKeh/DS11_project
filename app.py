@@ -58,21 +58,20 @@ def connect_db():
 
 @app.before_request
 def before_request():
-    print("Before request")
+    #print("Before request")
     g.mydb = connect_db()
     #g.reportList = getAllReports()
     #g.reviewList = getAllReviews()
-    print(reviewList)
 
 
 @app.teardown_request
 def teardown_request(exception):
-    print("After teardown request")
+    #print("After teardown request")
     g.mydb.close()
 
 @app.before_first_request
 def before_first_request():
-    print("First request")
+    #print("First request")
     g.mydb = connect_db()
     mycursor = g.mydb.cursor()
 
@@ -89,7 +88,7 @@ def before_first_request():
     suburbList = myresults
 
     #Get all suburb to LGAs
-    mycursor.execute("SELECT * FROM suburb_lga_mapping")
+    mycursor.execute("SELECT * FROM sub_to_lga")
     myresults = mycursor.fetchall()
     global suburblgaList
     suburblgaList = myresults
@@ -257,7 +256,7 @@ def add_review():
         strUserLat= form.getlist('userLat')[0]
         strUserLng= form.getlist('userLng')[0]
 
-        print(strUserLat)
+        
         suburbId = -1
 
         #if the user's current latlng are undefined, then redirect back to the report page
@@ -295,7 +294,6 @@ def add_review():
         #Get current review rating (work in progress)
         pastDangerRatingInt = -1
 
-        print(title, description, currentTime, suburbId, areaDangerRatingInt)
 
         #Execute command
         mycursor = g.mydb.cursor()
@@ -317,5 +315,5 @@ def add_review():
 
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run()
     
