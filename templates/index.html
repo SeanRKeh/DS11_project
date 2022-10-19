@@ -16,10 +16,6 @@
         integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
         crossorigin=""></script>
 
-        <!-- leaflet control geocoder -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
-        <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-
         <!-- leaflet fullscreen -->
         <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
         <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
@@ -36,7 +32,6 @@
     </head>
 
     <body>
-
         <!-------------------------------------------------------------->
         <!-------------------------------------------------------------->
         <!-------------------------------------------------------------->
@@ -46,46 +41,44 @@
             <a id="crime-vis" href="" target="_blank">
               <button type="button" class="btn btn-primary">Crimes in this area</button>
             </a>
+
             <button class="marker-close-button" onclick= "markerClose()">
               <i class="bi bi-x-lg"></i>
             </button>
           </div>
           
           <div>
-            
             <h2 class="card-title" style="font-size: 40px; padding-bottom: 30px">
               Report marker
             </h2>
-           
           </div>
-          <div class="data-vis-content" style="height: 100%">
-            
-            <div class="row marker-body" style="height: 90%">
-              <div class="col my-3" style="height: 100%">
-                <div class="card">
-                <div class="card-body">
-                  <h2 id="marker-title" class="card-title">
-                    Cale Jane Sullivan Marker reports
-                  </h1>
-                  <h5 id="marker-danger-rating" class="card-text">
-                    Danger rating of report: 5
-                  </h5>
-                  <h5 id="marker-area-recc" class="card-text">
-                    Willingness to return to the area: 5
-                  </h5>
-                  <p id="marker-description" class="card-text">
-                    Dangerous/aggressive drivers
-                  </p>
-                </div>  
-              </div>
-              </div>
-              <div id="review-container" class="col" style="height: 100%; overflow-y: scroll">
-                
-                
-              </div>
 
+          <div class="data-vis-content" style="height: 100%">
+            <div class="row marker-body" style="height: 90%">
+              <div class="col my-3" style="height: 100%; width: 50%;">
+                <div class="card">
+                  <div class="card-body">
+                    <h2 id="marker-title" class="card-title">
+                      Cale Jane Sullivan Marker reports
+                    </h1>
+
+                    <h5 id="marker-danger-rating" class="card-text">
+                      Danger rating of report: 5
+                    </h5>
+
+                    <h5 id="marker-area-recc" class="card-text">
+                      Willingness to return to the area: 5
+                    </h5>
+
+                    <p id="marker-description" class="card-text">
+                      Dangerous/aggressive drivers
+                    </p>
+                  </div>  
+                </div>
+              </div>
+              
+              <div id="review-container" class="col" style="height: 100%; overflow-y: scroll"></div>
             </div>
-            
           </div>
         </div>
 
@@ -101,13 +94,12 @@
             <h5>Safety Rating</h5>
           </div>
         </div>
-
-          
       </body>
 
         <script type="text/javascript">            
             var user_coord = 0;
 
+            /* Load in data from database */
             const policeMarkerData = {{policeStations | tojson}};
             const reportMarkerData = {{reports | tojson}};
             const reviewMarkerData = {{reviews | tojson}};
@@ -120,6 +112,7 @@
             // console.log(sublgaData);
             // console.log(crimeData);
 
+            // Convert arrays to dictionaries
             var sublgaDict = {};
             sublgaData.forEach(el => sublgaDict[el[0]] = el[1]);
             // console.log(sublgaDict);
@@ -128,7 +121,6 @@
             crimeData.forEach(el => crimeDict[el[0]] = el[1]);
             // console.log(crimeDict);
             
-
             //---------------------------------------------------------------
             //---------------------------------------------------------------
             //---------------------------------------------------------------
@@ -308,19 +300,12 @@
             });
 
             L.control.scale().addTo(map);
-            
-            // var marker = L.marker([-37.815, 144.964]).addTo(map);
-            var marker = L.marker([-35, 143]).addTo(map);
-            marker.bindPopup("<b>Hello world!</b><br>I am a centre popup.");
-
-            //Bind the markerMenu function to this marker (for testing purposes)
-            marker.on("click", openMarkerMenu);
 
             //---------------------------------------------------------------
             //---------------------------------------------------------------
             //---------------------------------------------------------------
-            //The report markers
-            //Create a custom report marker
+            // The report markers
+            // Create a custom report marker
             reportMarker = L.Marker.extend({
             options: { 
                 title: 'title',
@@ -351,9 +336,9 @@
             //---------------------------------------------------------------
             //---------------------------------------------------------------
             //---------------------------------------------------------------
-            //The popup marker (for when a non-police marker is clicked) code
+            // The popup marker (for when a non-police marker is clicked) code
             
-            //Function to open/close the marker
+            // Function to open/close the marker
             function openMarkerMenu(e){
               target = e.target;
               // console.log(target);
@@ -408,9 +393,6 @@
                 revContainer.appendChild(revHtml.getElementById('outRev'));
               };
 
-               
-
-
 
               if (
                 document.body.classList.contains("active-marker-popup")
@@ -421,7 +403,7 @@
               };
                 
             }
-            //Function to close a marker popup using the close appeneded close button
+            // Function to close a marker popup using the close appeneded close button
             function markerClose(){
               
               document.body.classList.remove("active-marker-popup");
@@ -471,10 +453,10 @@
             //---------------------------------------------------------------
             //police markers things
             var PoliceIcon = L.icon({
-              iconUrl: "https://raw.githubusercontent.com/qsun0018/3179/main/icon1.png",
-              iconSize: [80, 80],
-              iconAnchor: [20, 58],
-              popupAnchor: [20, -30],
+              iconUrl: "{{ url_for('static', filename= 'image/icon2.png') }}",
+              iconSize: [35, 40],
+              iconAnchor: [0, 0],
+              popupAnchor: [17, 5],
             });
 
             for (let i = 0; i < policeMarkerData.length; i++) {
@@ -618,6 +600,7 @@
               console.log("crime_ave", crime_ave);
               */
 
+              // These weights can be adjusted
               const tot_safety = 0.2 * pol_safety + 0.2 * rep_safety + 0.2 * rep_again + 0.2 * rev_safety + 0.2 * crime_ave;
               document.getElementById("DRating").innerHTML = tot_safety.toFixed(2);
             }            
